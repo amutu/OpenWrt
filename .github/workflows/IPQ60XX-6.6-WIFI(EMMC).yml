@@ -16,6 +16,7 @@ env:
   FIRMWARE_RELEASE: true
   FIRMWARE_TAG: IPQ60XX-6.6-WIFI(EMMC)
   TZ: Asia/Shanghai
+  WRT_COMMIT: 199d27db53605e4e1c4bbc90dae92ee976ff8f0e
 
 jobs:
   Build:
@@ -65,6 +66,10 @@ jobs:
         df -hT $GITHUB_WORKSPACE
         git clone $REPO_URL -b $REPO_BRANCH openwrt
         cd openwrt
+        if [ -n "$WRT_COMMIT" ]; then
+          echo "手动回滚 $REPO_URL 到 commit $WRT_COMMIT".
+          git reset --hard $WRT_COMMIT
+        fi
         echo "OPENWRT_PATH=$PWD" >> $GITHUB_ENV
         VERSION_INFO=$(git show -s --date=short --format="作者: %an<br/>时间: %cd<br/>内容: %s<br/>hash: %H")
         echo "VERSION_INFO=$VERSION_INFO" >> $GITHUB_ENV
