@@ -16,7 +16,7 @@ env:
   FIRMWARE_RELEASE: true
   FIRMWARE_TAG: IPQ60XX-6.6-WIFI(EMMC)
   TZ: Asia/Shanghai
-  WRT_COMMIT: 199d27db53605e4e1c4bbc90dae92ee976ff8f0e
+  WRT_COMMIT: 7d85c7cf39770406993ab59dbd0c9c23c9b68f31
 
 jobs:
   Build:
