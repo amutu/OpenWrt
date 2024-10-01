@@ -16,7 +16,7 @@ env:
   FIRMWARE_RELEASE: true
   FIRMWARE_TAG: IPQ60XX-6.6-WIFI(EMMC)
   TZ: Asia/Shanghai
-  WRT_COMMIT: 7d85c7cf39770406993ab59dbd0c9c23c9b68f31
+  WRT_COMMIT: 199d27db53605e4e1c4bbc90dae92ee976ff8f0e
 
 jobs:
   Build:
@@ -97,6 +97,8 @@ jobs:
     - name: Install Feeds
       run: |
         cd $OPENWRT_PATH
+        sed -i -e '/nss_packages/d' feeds.conf.default
+        echo "src-git nss_packages https://github.com/qosmio/nss-packages.git;NSS-12.4-K6.x" >> feeds.conf.default
         ./scripts/feeds update -a
         ./scripts/feeds install -a
 
